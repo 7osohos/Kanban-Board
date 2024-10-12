@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  font-family: "Poppins", sans-serif;
+  --white: #fff;
+  --black: black;
+  --accent: rgb(177, 37, 95);
+  transition: 0.5s !important;
+}
+body.scarlet {
+  --accent: rgb(209, 32, 106);
+}
+body.forestGreen {
+  --accent: rgb(10, 163, 79);
+}
+body.orange {
+  --accent: rgb(255, 136, 0);
+}
+body#dark.scarlet {
+  --accent: rgb(255, 0, 106);
+}
+body.ocean {
+  --accent: rgb(35, 114, 218);
+}
+body#dark.ocean {
+  --accent: rgb(0, 102, 255);
+}
+body#dark.forestGreen {
+  --accent: rgb(55, 184, 113);
+}
+body#dark.orange {
+  --accent: rgb(255, 136, 0);
+}
+body#dark {
+  background-color: #494949;
+  --black: #fff;
+  --white: rgb(44, 44, 44);
+  /* --accent: rgb(255, 0, 106); */
+}
+.main_body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.board {
+  /* width: max-content; */
+  width: 300px;
+  background-color: #fff;
+  padding: 10px;
+  min-height: 100px;
+  margin: 30px auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.164);
+  transition: 0.3s;
+  transition-property: padding, box-shadow;
+  position: relative;
+  cursor: default !important;
+}
+.board:hover {
+  box-shadow: 0 0 10px black;
+}
+.board {
+  background-color: var(--white);
+  color: var(--black);
+}
+.board.dragOver {
+  padding-bottom: 20px;
+  border: 4px dashed var(--accent);
+  /* background-color: red; */
+}
+.board h3 {
+  border-bottom: 1px solid var(--black);
+  text-align: center;
+  user-select: none;
+  margin-bottom: 10px;
+  padding: 5px;
+  pointer-events: none;
+}
+.board .task {
+  background-color: var(--accent);
+  color: white;
+  /* color: black; */
+  cursor: grab;
+  margin: 5px;
+  position: relative;
+  padding: 2px 5px;
+  user-select: none;
+  z-index: 22133;
+  transition: 0.1s;
+}
+
+.task.dragged {
+  /* transform: rotateZ(2deg); */
+  /* display: none; */
+  background-color: var(--black);
+  color: var(--white);
+
+  scale: 1.05;
+}
+
+.board .task:hover {
+  /* scale: 1.1; */
+}
+#emptySpan {
+  position: absolute;
+  /* background-color: red; */
+  text-align: center;
+  /* color: rgba(0, 0, 0, 0.397); */
+  color: var(--black);
+  opacity: 0.5;
+  font-weight: 500;
+  /* width: 90%; */
+  /* margin: auto; */
+  top: 75px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1 !important;
+}
+
+.tools_menu {
+  position: fixed;
+  background-color: white;
+  color: var(--accent);
+  background-color: var(--accent);
+  color: white;
+  border: 2px solid var(--white);
+  font-size: 40px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 20px;
+  bottom: 0;
+  right: 0;
+  z-index: 123;
+  overflow: hidden;
+  user-select: none;
+  transition: 0.2s ease-out;
+}
+.tools_menu .tools {
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.tools_menu.open .tools {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.tools_menu span {
+  pointer-events: none;
+}
+.tools {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 400;
+  width: max-content;
+  transition: 0.5s;
+}
+.tools .tool {
+  margin: 10px;
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--accent);
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.tool:hover {
+  border-radius: 10px;
+  scale: 1.1;
+}
+.tools_menu.open {
+  width: 150px;
+  height: 220px;
+  border-radius: 20px;
+  box-shadow: 0 0 0px 5000px rgba(0, 0, 0, 0.39);
+}
+.tools_menu.open span {
+  display: none;
+}
+#change_styling {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 0;
+  background-color: transparent;
+}
+#change_styling .color_style {
+  display: inline-block;
+  /* background-color: red; */
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  pointer-events: all;
+  border: 1px solid white;
+  transition: 0.3s;
+  border-radius: 66% 34% 66% 34% / 33% 70% 30% 67%;
+}
+.color_style:hover {
+  scale: 1.2;
+}
+#change_styling #scarlet {
+  background-color: rgb(177, 37, 95);
+}
+#change_styling #ocean {
+  background-color: rgb(0, 102, 255);
+}
+#change_styling #forestGreen {
+  background-color: rgb(10, 163, 79);
+}
+#change_styling #orange {
+  background-color: rgb(255, 136, 0);
+}
+
+.input_fields {
+  background-color: rgba(0, 0, 0, 0.185);
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  z-index: 45346;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* pointer-events: none; */
+  display: none;
+  /* opacity: 0; */
+}
+.input_fields input,
+.submit {
+  padding: 20px;
+  width: 70%;
+  border: 2px solid var(--accent);
+  border-radius: 30px;
+  margin: 20px;
+  background-color: var(--white);
+  color: var(--accent);
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+}
+.input_fields .submit {
+  width: 30%;
+  padding: 10px;
+  margin: 0px;
+  transition: 0.3s;
+  /* color: white; */
+  border: 2px solid var(--accent);
+}
+.submit:hover {
+  background-color: var(--accent);
+  box-shadow: 0 0 20px white;
+  border-color: var(--white);
+  letter-spacing: 3px;
+  color: white;
+}
+.submit:active {
+  scale: 0.9;
+}
